@@ -1,125 +1,130 @@
 #include <stdio.h>
 
-//Declarando a matriz que armazena os valores globalmente. Para que eu consiga acessar os seus valores em qualquer local do arquivo:
-float medida_dos_lados[5][3];
-int tipo_de_triangulo[5]; // Criei este vetor que armazena os cinco valores de tipos de triângulos obtidos.
+// Função que retorna o tipo de figura escolhida:
+int verificaFigura(){
 
+    // pedindo a figura escolhida a partir de um número.
+    // este numero será retornado
+    int escolha_do_usuario;
+    printf("\nEscolha uma das figuras para calcular a area\n'1' -> Para quadrado\n'2' -> Para triangulo\n'3' -> Para retangulo\nDigite o valor aqui -> ");
+    scanf("%d", &escolha_do_usuario);
 
-// Função que ler a medida dos lados:
-void LePositivo(){
-
-    // obtendo os valores dos lados:
-    for(int linha = 0; linha < 5; linha++){
-
-        printf("\nTriangulo -> %d", linha + 1);
-
-        for(int coluna = 0; coluna < 3; coluna++){
-            printf("\nDigite o valor do lado %d\ndigite aqui -> ", coluna + 1);
-            scanf("%f", &medida_dos_lados[linha][coluna]);
-
-            // fazendo tratamento de erro caso o usuário digite um valor negativo para o lado do triângulo:
-            while(medida_dos_lados[linha][coluna] < 0){
-                printf("\nVoce digitou um valor negativo!\ndigite novamente -> ");
-                scanf("%f", &medida_dos_lados[linha][coluna]);
-            }
-        
-        }
-    
+    // Fazendo tratamento de erro caso ele digite um número inválido:
+    while(escolha_do_usuario < 1 || escolha_do_usuario > 3){
+        printf("\nERRO -> Voce digitou um valor invalido\nDigite novamente aqui -> ");
+        scanf("%d", &escolha_do_usuario);
     }
+
+    return escolha_do_usuario;
+}
+
+// Função de calculo do quadrado:
+void calculaQuadrado(){
+
+    // Criando uma variável que armazena o valor de um lado do quadrado.Como os lados de um quadrado tem o mesmo comprimento, eu só nescessito saber de um valor:
+    float lado_quadrado;
+
+    // Obtendo valores dos lados:
+    printf("\nCerto, voce escolheu o quadrado!\nDigite o valor correspondente do lado do quadrado -> ");
+    scanf("%f", &lado_quadrado);
+    
+    // fazendo tratamento de erro caso o usuário digite um valor negativo:
+    while(lado_quadrado < 0){
+        printf("\nERRO -> Voce digitou um valor negativo!\nDigite novamente o valor -> ");
+        scanf("%f", &lado_quadrado);
+    }
+
+    // Calculando a área:
+    float area_do_quadrado = lado_quadrado * lado_quadrado;
+
+    // printando as informações:
+    printf("\nFigura escolhida -> Quadrado\nValor do lado -> %.2f\nArea correspondente -> %.2f",lado_quadrado, area_do_quadrado);
+
+} 
+
+// Função de calculo do triangulo:
+void calculaTriangulo(){
+
+    // criando variáveis nescessárias para fazer o calculo:
+    float base_do_triangulo, altura_do_triangulo, area_do_triangulo;
+    
+    
+    // Pedindo a base e a altura correspondente para o usuário, para que seja possível fazer o calculo da aréa:
+    printf("\nCerto, voce escolheu o triangulo!\nPrimeiramente, digite o valor da base(valor de um dos lados):\nDigite aqui -> ");
+    scanf("%f", &base_do_triangulo);
+
+    // fazendo tratamento de erros de digitação:
+    while(base_do_triangulo < 0){
+        printf("\nERRO -> Voce digitou um valor negativo!\nDigite novamente o valor -> ");
+        scanf("%f", &base_do_triangulo);
+    }
+
+    // pedindo a altura:
+    printf("\nAgora, digite a altura correspondente\nDigite aqui -> ");
+    scanf("%f", &altura_do_triangulo);
+
+    // Fazendo tratamento de erros:
+    while(altura_do_triangulo < 0){
+        printf("\nERRO -> Voce digitou um valor negativo!\nDigite novamente o valor -> ");
+        scanf("%f", &altura_do_triangulo);
+    }
+
+    // calculando área:
+    area_do_triangulo = (base_do_triangulo * altura_do_triangulo) / 2;
+
+    // printando as informações:
+    printf("\nFigura escolhida -> Triangulo\nBase informada -> %.2f\nAltura informada -> %.2f\nArea correspondente -> %.2f", base_do_triangulo, altura_do_triangulo, area_do_triangulo);
 
 }
 
-// Implementando a função que verifica o tipo do triângulo:
-void TipoTriangulo(){
+// Função que calcula a area do retângulo:
+void calculaRetangulo(){
 
-    // Iterando sobre os valores de cada triângulo para verificar o tipo dele:
-    for(int triangulo = 0; triangulo < 5; triangulo++){
-        
-        // Se todos os lados são iguais, ele é equilátero.
-        if( (medida_dos_lados[triangulo][0] == medida_dos_lados[triangulo][1]) && 
-        (medida_dos_lados[triangulo][0] == medida_dos_lados[triangulo][2]) 
-        ){
-            tipo_de_triangulo[triangulo] = 1; 
-        }  
-        // verificando se pelo menos dois dos lados são iguais:
-        else if((medida_dos_lados[triangulo][0] == medida_dos_lados[triangulo][1]) || 
-        (medida_dos_lados[triangulo][0] == medida_dos_lados[triangulo][2]) ||
-        (medida_dos_lados[triangulo][1] == medida_dos_lados[triangulo][2])
-        ){
-            tipo_de_triangulo[triangulo] = 2;
-        }
-        // se nenhum dos lados são iguais, ele é escaleno.
-        else{
-            tipo_de_triangulo[triangulo] = 3;
-        }
+    // criando as variáveis nescessárias:
+    float altura_retangulo, base_retangulo, area_do_retangulo;
+    
+    //pedindo a altura:
+    printf("\nCerto, voce escolheu o retangulo!\nPrimeiramente, digite o valor da altura(comprimento)\ndigite aqui -> ");
+    scanf("%f", &altura_retangulo);
 
+    // tratamento de erros:
+    while(altura_retangulo < 0){
+        printf("\nERRO -> Voce digitou um valor negativo!\nDigite novamente o valor -> ");
+        scanf("%f", &altura_retangulo);
     }
+
+    // Pedindo a base:
+    printf("\nAgora, digite o valor da base(largura)\ndigite aqui -> ");
+    scanf("%f", &base_retangulo);
+
+    // tratamento de erros:
+    while(base_retangulo < 0){
+        printf("\nERRO -> Voce digitou um valor negativo!\nDigite novamente o valor -> ");
+        scanf("%f", &base_retangulo);
+    }
+
+    // calculando a área:
+    area_do_retangulo = altura_retangulo * base_retangulo;
+
+    // Printando as informações:
+    printf("\nFigura escolhida -> Retangulo\nAltura informada -> %.2f\nBase informada -> %.2f\nArea correspondente -> %.2f", altura_retangulo, base_retangulo, area_do_retangulo);
 
 }
 
-void verificar_tipo(){
-    
-    for(int i = 0; i < 5; i++){
-        printf("%d\t", tipo_de_triangulo[i]);
+void main(){
+
+    // Chamando a função que pede a figura e armazenando o valor de retorno na variável:
+    int escolha_do_usuario = verificaFigura();
+
+    // Verificando qual foi a escolha do usuário e chamando a função correspondente:  
+    if(escolha_do_usuario == 1){
+        calculaQuadrado();
     }
-
-}
-
-
-// função que verifica se é um triângulo válido
-int EhTriangulo(){
-
-    // Basicamente vou iterar sobre os valores dos lados de cada triângulo informado, e se esses valores forem positivos, ele é um trinângulo válido:
-    for(int linha = 0; linha < 5; linha++){
-
-        for(int coluna = 0; coluna < 3; coluna++){
-            // Fazendo verificação:
-            if(medida_dos_lados[linha][coluna] > 0){
-                return 1;
-            }
-            else{
-                return 0;
-            }
-       
-       }
-    
+    else if(escolha_do_usuario == 2){
+        calculaTriangulo();
     }
-
-}
-
-void main(){    
-
-    // Obtendo os valores dos Triangulos:
-    LePositivo();
-
-    TipoTriangulo();
-
-    verificar_tipo();
-
-
-    // // verificando se os triângulos informados são válidos:
-    // if(EhTriangulo() == 1){
-    //     printf("\nApos a verificacao, os valores dos lados dos triangulos foram validados!\n");
-    // }
-    // else{
-    //     printf("\nErro, A valores inválidos relacionados aos triangulos informados!\n");
-    // }
-    
-    // // Iterando sobre o vetor com os tipos de triângulos para verificar e printar o tipo de cada triângulo informado:
-    // for(int triangulo = 0; triangulo < 5; triangulo++){
-    //     // verificando tipo:
-    //     if(tipo_de_triangulo[triangulo] == 1){
-    //         printf("\nO triangulo %d eh do tipo Equilatero.", triangulo + 1);
-    //     }
-    //     else if(tipo_de_triangulo[triangulo] == 2){
-    //         printf("\nO triangulo %d eh do tipo Isosceles.", triangulo + 1);
-    //     }
-    //     else{
-    //         printf("\nO triangulo %d eh do tipo Escaleno.", triangulo + 1);
-    //     }
-    
-    // }
-
-
-
+    else{
+        calculaRetangulo();
+    }
+  
 }
