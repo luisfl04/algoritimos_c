@@ -16,11 +16,11 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
 
 
 
-// * MÉTODOS GERAIS * :
-
-
-
 // * MÉTODOS DE VERIFICAÇÃO * :
+
+
+
+// * MÉTODOS GERAIS * :
 
 
 
