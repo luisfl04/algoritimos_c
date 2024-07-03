@@ -6,6 +6,7 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
 
 // * BIBLIOTECAS NESCESSÁRIAS * :
 
+// * CONSTANTES USADAS * :
 
 // * CABEÇALHOS DE FUNÇÕES IMPLEMENTADOS * :
 
